@@ -35,14 +35,32 @@ const checkout = (event: React.MouseEvent<HTMLAnchorElement>) => {
   if (event.currentTarget.getAttribute("href") === "#") event.preventDefault();
 };
 
+const receiveSlides = [
+  { src: "/receber-1.png", alt: "Galeria com receitas de marmitas fit, filtros e informações nutricionais" },
+  { src: "/receber-2.png", alt: "Planejamento automático da semana e geração de lista de compras" },
+  { src: "/receber-3.png", alt: "Ferramentas bônus para facilitar a escolha e o planejamento das marmitas" },
+  { src: "/receber-4.png", alt: "Montador VIP de cardápios personalizados" },
+  { src: "/receber-5.png", alt: "Experiência VIP para montar cardápios do seu jeito" },
+];
+
 export default function Home() {
   const [upsell, setUpsell] = useState(false);
+  const [receiveSlide, setReceiveSlide] = useState(0);
+  const [receivePaused, setReceivePaused] = useState(false);
   useEffect(() => {
     document.body.style.overflow = upsell ? "hidden" : "";
     const close = (e: KeyboardEvent) => e.key === "Escape" && setUpsell(false);
     window.addEventListener("keydown", close);
     return () => { document.body.style.overflow = ""; window.removeEventListener("keydown", close); };
   }, [upsell]);
+
+  useEffect(() => {
+    if (receivePaused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const timer = window.setInterval(() => {
+      setReceiveSlide((current) => (current + 1) % receiveSlides.length);
+    }, 4800);
+    return () => window.clearInterval(timer);
+  }, [receivePaused]);
 
   useEffect(() => {
     const elements = Array.from(document.querySelectorAll<HTMLElement>(
@@ -108,6 +126,38 @@ export default function Home() {
           <img src="/marmitas-organizadas-geladeira.png" alt="Geladeira organizada com marmitas fit e planejamento semanal"/>
         </div>
         <div className="organizedTags"><span>Fácil de organizar</span><span>Pronto para congelar</span><span>Prático para a semana</span></div>
+      </section>
+
+      <section className="receiveSection" aria-labelledby="receive-title">
+        <div className="sectionHead">
+          <span className="kicker">Tudo em um só lugar</span>
+          <h2 id="receive-title">O que você vai receber</h2>
+          <p>Veja por dentro as receitas, o planejamento e as ferramentas que vão deixar sua semana mais prática.</p>
+        </div>
+        <div
+          className="receiveCarousel"
+          onMouseEnter={() => setReceivePaused(true)}
+          onMouseLeave={() => setReceivePaused(false)}
+          onFocus={() => setReceivePaused(true)}
+          onBlur={() => setReceivePaused(false)}
+        >
+          <div className="receiveViewport">
+            <div className="receiveTrack" style={{ transform: `translateX(-${receiveSlide * 100}%)` }}>
+              {receiveSlides.map((slide, index) => (
+                <figure className="receiveSlide" key={`${slide.src}-${index}`} aria-hidden={index !== receiveSlide}>
+                  <img src={slide.src} alt={slide.alt} loading={index === 0 ? "eager" : "lazy"} />
+                </figure>
+              ))}
+            </div>
+          </div>
+          <button className="receiveArrow receivePrev" type="button" aria-label="Ver imagem anterior" onClick={() => setReceiveSlide((current) => (current - 1 + receiveSlides.length) % receiveSlides.length)}>‹</button>
+          <button className="receiveArrow receiveNext" type="button" aria-label="Ver próxima imagem" onClick={() => setReceiveSlide((current) => (current + 1) % receiveSlides.length)}>›</button>
+          <div className="receiveDots" aria-label="Escolher imagem do carrossel">
+            {receiveSlides.map((_, index) => (
+              <button key={index} type="button" aria-label={`Ver imagem ${index + 1}`} aria-current={index === receiveSlide ? "true" : undefined} onClick={() => setReceiveSlide(index)} />
+            ))}
+          </div>
+        </div>
       </section>
 
       <section className="section soft" id="para-quem">
