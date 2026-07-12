@@ -393,7 +393,7 @@ h1,h2,h3{font-family:Arial,Helvetica,sans-serif;font-weight:900;letter-spacing:-
 .receiveSection .sectionHead h2{font-size:52px;line-height:1.02}
 .receiveSection .sectionHead p{max-width:720px;margin-inline:auto;font-size:17px;line-height:1.45}
 .receiveSection .kicker{font-size:12px;padding:7px 14px}
-.receiveCarousel{position:relative;max-width:1080px;margin:0 auto}
+.receiveCarousel{position:relative;max-width:1160px;margin:0 auto}
 .receiveViewport{
   overflow:hidden;
   border:1px solid #d9e7d5;
@@ -456,13 +456,13 @@ h1,h2,h3{font-family:Arial,Helvetica,sans-serif;font-weight:900;letter-spacing:-
 .receiveDots button[aria-current="true"]{width:28px;background:#35a91b}
 
 @media(max-width:700px){
-  .receiveSection{padding:46px 7px}
+  .receiveSection{padding:46px 3px}
   .receiveSection .sectionHead{margin-bottom:24px;padding:0 9px}
   .receiveSection .kicker{font-size:10px;padding:6px 12px;margin-bottom:10px}
   .receiveSection .sectionHead h2{font-size:34px;line-height:1.03;margin-bottom:9px}
   .receiveSection .sectionHead p{max-width:370px;margin-inline:auto;font-size:14px;line-height:1.42}
   .receiveViewport{border-radius:17px;box-shadow:0 12px 32px rgba(17,61,36,.13)}
-  .receiveSlide{aspect-ratio:.98/1;padding:3px}
+  .receiveSlide{aspect-ratio:.96/1;padding:0}
   .receiveSlide img{border-radius:10px}
   .receiveArrow{width:40px;height:40px;font-size:29px}
   .receivePrev{left:7px}.receiveNext{right:7px}
