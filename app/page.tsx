@@ -40,7 +40,6 @@ const receiveSlides = [
   { src: "/receber-2.png", alt: "Planejamento automático da semana e geração de lista de compras" },
   { src: "/receber-3.png", alt: "Ferramentas bônus para facilitar a escolha e o planejamento das marmitas" },
   { src: "/receber-4.png", alt: "Montador VIP de cardápios personalizados" },
-  { src: "/receber-5.png", alt: "Experiência VIP para montar cardápios do seu jeito" },
 ];
 
 export default function Home() {
