@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import MetaPixel from "./MetaPixel";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -13,7 +12,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="pt-BR">
       <body>
         {children}
-        <MetaPixel />
         <Script
           src="https://cdn.utmify.com.br/scripts/utms/latest.js"
           strategy="afterInteractive"
@@ -22,6 +20,14 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           async
           defer
         />
+        <Script id="utmify-pixel" strategy="afterInteractive">
+          {`window.pixelId = "6a540b2f544622bc4f7bfeee";
+var a = document.createElement("script");
+a.setAttribute("async", "");
+a.setAttribute("defer", "");
+a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+document.head.appendChild(a);`}
+        </Script>
       </body>
     </html>
   );
